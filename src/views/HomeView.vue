@@ -36,7 +36,7 @@
             <ContainerComponent>
                 <SliderListComponent
                     title="Тренерский состав"
-                    :itemCountToShow="6"
+                    :itemCountToShow="5"
                 >
                     <div
                         class="coaches"
