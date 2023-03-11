@@ -5,7 +5,10 @@
         </header>
         <section class="about-photos">
             <Container>
-                <SliderListComponent title="Фото кортов">
+                <SliderListComponent
+                    title="Фото кортов"
+                    :item-count-to-show="1"
+                >
                     <div
                         class="about-slide-item"
                         v-for="(photo, index) in courtPhotos"
@@ -98,6 +101,31 @@ export default class AboutView extends Vue {
             backgroundImgUrl: require("@/assets/summer-court.jpg"),
             routeUrl: "/",
             routeTitle: "Зимний корт",
+        },
+        {
+            backgroundImgUrl: require("@/assets/summer-court.jpg"),
+            routeUrl: "/",
+            routeTitle: "Весенний корт",
+        },
+        {
+            backgroundImgUrl: require("@/assets/summer-court.jpg"),
+            routeUrl: "/",
+            routeTitle: "Весенний корт",
+        },
+        {
+            backgroundImgUrl: require("@/assets/summer-court.jpg"),
+            routeUrl: "/",
+            routeTitle: "Весенний корт",
+        },
+        {
+            backgroundImgUrl: require("@/assets/summer-court.jpg"),
+            routeUrl: "/",
+            routeTitle: "Весенний корт",
+        },
+        {
+            backgroundImgUrl: require("@/assets/summer-court.jpg"),
+            routeUrl: "/",
+            routeTitle: "Весенний корт",
         },
         {
             backgroundImgUrl: require("@/assets/summer-court.jpg"),

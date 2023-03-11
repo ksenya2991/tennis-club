@@ -19,7 +19,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { ISliderItem } from "@/types/slider";
-import TitleComponent from "../Title.vue";
+import TitleComponent from "@/components/Title.vue";
 
 @Component({
     components: {
@@ -33,11 +33,10 @@ import TitleComponent from "../Title.vue";
         },
         title: {
             type: String,
-            default: "title",
+            default: "Title",
         },
         itemCountToShow: {
             type: Number,
-            required: true,
             default: 1,
         },
     },
@@ -47,39 +46,41 @@ export default class SliderListComponent extends Vue {
     sliderItemWidth = 0;
     gapCssProp = 0;
     maxSliderLineWidth = 0;
-    title: any;
 
     mounted() {
         const listElement: HTMLElement = this.$refs.sliderItems as HTMLElement;
         this.sliderItemWidth = listElement.children[0].clientWidth;
+        this.maxSliderLineWidth =
+            this.sliderItemWidth *
+                (listElement.children.length -
+                    (this.$props.itemCountToShow - 1)) -
+            this.sliderItemWidth;
+
         const gapCssProp = window
             .getComputedStyle(listElement, null)
             .getPropertyValue("gap");
-        this.gapCssProp = parseInt(gapCssProp);
-        this.maxSliderLineWidth =
-            this.sliderItemWidth *
-                (listElement.children.length - this.$props.itemCountToShow) -
-            this.sliderItemWidth;
 
-        console.log(this.sliderItemWidth * listElement.children.length);
+        this.gapCssProp = parseInt(gapCssProp);
     }
+
     clickOnLeft() {
+        if (this.offset >= this.maxSliderLineWidth) {
+            return;
+        }
+
+        const listElement: HTMLElement = this.$refs.sliderItems as HTMLElement;
+        this.offset = this.offset + (this.gapCssProp + this.sliderItemWidth);
+
+        listElement.style.transform = `translateX(${-this.offset}px)`;
+    }
+
+    clickOnRight() {
         if (!this.offset) {
             return;
         }
         const listElement: HTMLElement = this.$refs.sliderItems as HTMLElement;
-        this.offset = this.offset - (this.gapCssProp + this.sliderItemWidth);
-        listElement.style.transform = `translateX(${-this.offset}px)`;
-    }
-    clickOnRight() {
-        console.log("this.offset", this.offset);
-        console.log("this.maxSliderLineWidth", this.maxSliderLineWidth);
 
-        if (this.offset >= this.maxSliderLineWidth) {
-            return;
-        }
-        const listElement: HTMLElement = this.$refs.sliderItems as HTMLElement;
-        this.offset = this.offset + (this.gapCssProp + this.sliderItemWidth);
+        this.offset = this.offset - (this.gapCssProp + this.sliderItemWidth);
         listElement.style.transform = `translateX(${-this.offset}px)`;
     }
 }
