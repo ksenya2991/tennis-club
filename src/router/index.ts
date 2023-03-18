@@ -27,6 +27,34 @@ const routes: Array<RouteConfig> = [
         // which is lazy-loaded when the route is visited.
         component: () =>
             import(/* webpackChunkName: "news" */ "../views/AboutView.vue"),
+        children: [
+            {
+                path: "general",
+                component: () => import("@/views/clubRules/GeneralView.vue"),
+            },
+            {
+                path: "schedule",
+                component: () => import("@/views/clubRules/Schedule.vue"),
+            },
+            {
+                path: "general-definitions",
+                component: () =>
+                    import("@/views/clubRules/GeneralDefinitions.vue"),
+            },
+            {
+                path: "pay",
+                component: () =>
+                    import("@/views/clubRules/ServicesPayment.vue"),
+            },
+            {
+                path: "rules-on-place",
+                component: () => import("@/views/clubRules/ConductRules.vue"),
+            },
+            {
+                path: "other",
+                component: () => import("@/views/clubRules/Other.vue"),
+            },
+        ],
     },
 ];
 

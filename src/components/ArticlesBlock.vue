@@ -13,7 +13,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import Container from "./Container.vue";
-import { IPhoto } from "@/types";
+import { IPhoto } from "@/types/index";
 
 @Component({
     components: {

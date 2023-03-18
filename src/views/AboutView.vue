@@ -62,27 +62,61 @@
                         lorem placerat congue. Nulla purus vestibulum suscipit
                         pellentesque risus non.
                     </p>
-                    <div class="about-board__details"></div>
+                    <div class="about-board__details">
+                        <AboutCourtComponent
+                            v-for="(item, index) in courts"
+                            :description="item.description"
+                            :image="item.image"
+                            :key="index"
+                        />
+                    </div>
                 </BoardComponent>
             </Container>
+        </section>
+        <section class="rules">
+            <container>
+                <TitleComponent title="Правила" />
+            </container>
+            <container :styleType="containerType.FLEX">
+                <div class="about-sidebar">
+                    <AboutRuleComponent
+                        v-for="(rule, index) in rulesList"
+                        :key="index"
+                        :rule="rule"
+                        :numberOfRule="index + 1"
+                    />
+                </div>
+                <div class="about-views">
+                    <router-view />
+                </div>
+            </container>
         </section>
     </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import Container from "@/components/Container.vue";
-import SliderListComponent from "@/components/slider/SliderList.vue";
-import BoardComponent from "@/components/Board.vue";
+import Container from "../components/Container.vue";
+import SliderListComponent from "../components/slider/SliderList.vue";
+import BoardComponent from "../components/Board.vue";
+import AboutCourtComponent from "../components/AboutCourt.vue";
+import { ContainerType } from "../components/Container.vue";
+import TitleComponent from "../components/Title.vue";
+import { IRule } from "../types/rule";
+import AboutRuleComponent from "../components/About/AboutRule.vue";
 
 @Component({
     components: {
         Container,
         SliderListComponent,
         BoardComponent,
+        AboutCourtComponent,
+        TitleComponent,
+        AboutRuleComponent,
     },
 })
 export default class AboutView extends Vue {
+    containerType = ContainerType;
     courtPhotos = [
         {
             backgroundImgUrl: require("@/assets/summer-court.jpg"),
@@ -103,6 +137,46 @@ export default class AboutView extends Vue {
             backgroundImgUrl: require("@/assets/summer-court.jpg"),
             routeUrl: "/",
             routeTitle: "Весенний корт",
+        },
+    ];
+    courts = [
+        {
+            image: require("@/assets/7.svg"),
+            description: "Летних грунтовых кортов",
+        },
+        {
+            image: require("@/assets/4.svg"),
+            description: "Зимних корта с покрытием «искусственная трава»",
+        },
+        {
+            image: require("@/assets/3.svg"),
+            description: "Зимних корта с покрытием «hard»",
+        },
+    ];
+    rulesList: IRule[] = [
+        {
+            title: "Общие положения",
+            link: "/about/general",
+        },
+        {
+            title: "Основные определения",
+            link: "/about/general-definitions",
+        },
+        {
+            title: "Порядок предоставления игрового времени на кортах",
+            link: "/about/schedule",
+        },
+        {
+            title: "Оплата услуг",
+            link: "/about/pay",
+        },
+        {
+            title: "Правила поведения на территории и кортах",
+            link: "/about/rules-on-place",
+        },
+        {
+            title: "Прочие положения",
+            link: "/about/other",
         },
     ];
 }
@@ -150,9 +224,26 @@ export default class AboutView extends Vue {
         font-size: 36px;
         margin-bottom: 60px;
     }
+    &__details {
+        margin-top: 58px;
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+    }
 }
 .board-text {
     font-weight: 400;
     font-size: 14px;
+}
+
+.about-sidebar {
+    width: 366px;
+    margin-right: 100px;
+    font-weight: 600;
+    font-size: 21px;
+    color: #333333;
+}
+.about-views {
+    width: 834px;
 }
 </style>

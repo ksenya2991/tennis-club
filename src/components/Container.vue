@@ -11,6 +11,7 @@ import { Component, Vue } from "vue-property-decorator";
 
 export enum ContainerType {
     GRID = "grid",
+    FLEX = "flex",
     FLEX_JUSTIFY_BETWEEN = "flex-justify-between",
     GRID_NEWS = "grid-news",
 }
@@ -34,6 +35,10 @@ export default class extends Vue {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     grid-gap: 12px;
+}
+
+.container.flex {
+    display: flex;
 }
 .container.flex-justify-between {
     display: flex;

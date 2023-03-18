@@ -37,15 +37,11 @@ export default class BoardComponent extends Vue {}
     display: flex;
     justify-content: flex-end;
 }
-// .left-image {
-//     position: absolute;
-//     width: 526px;
-// }
 .right-info {
-    padding: 40px 60px 0 146px;
+    padding: 70px 60px 0 146px;
     position: relative;
     background-color: #f7ece1;
-    max-width: 850px;
+    max-width: 820px;
     height: 654px;
     &::before {
         content: "";
@@ -56,6 +52,8 @@ export default class BoardComponent extends Vue {}
         width: 526px;
         height: 514px;
         left: -50%;
+        top: 50%;
+        margin-top: -257px;
     }
     &__title {
         font-weight: 700;

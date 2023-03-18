@@ -5,6 +5,8 @@
             :showControls="true"
             @arrowLeftClickHandler="clickOnLeft()"
             @arrowRightClickHandler="clickOnRight()"
+            :disabledLeft="!this.offset"
+            :disabledRight="this.offset >= this.maxSliderLineWidth"
         />
         <div class="slider-items">
             <div class="slider-items-line" ref="sliderItems">
@@ -60,8 +62,6 @@ export default class SliderListComponent extends Vue {
             this.sliderItemWidth *
                 (listElement.children.length - this.$props.itemCountToShow) -
             this.sliderItemWidth;
-
-        console.log(this.sliderItemWidth * listElement.children.length);
     }
     clickOnLeft() {
         if (!this.offset) {
@@ -72,9 +72,6 @@ export default class SliderListComponent extends Vue {
         listElement.style.transform = `translateX(${-this.offset}px)`;
     }
     clickOnRight() {
-        console.log("this.offset", this.offset);
-        console.log("this.maxSliderLineWidth", this.maxSliderLineWidth);
-
         if (this.offset >= this.maxSliderLineWidth) {
             return;
         }

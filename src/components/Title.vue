@@ -2,10 +2,10 @@
     <div class="title-wrapper">
         <h3 class="title">{{ title }}</h3>
         <div class="title-controls" v-if="showControls">
-            <button @click="arrowLeftClickHandler()">
+            <button :disabled="disabledLeft" @click="arrowLeftClickHandler()">
                 <img src="../assets/arrow-left.svg" alt="" />
             </button>
-            <button @click="arrowRightClickHandler()">
+            <button :disabled="disabledRight" @click="arrowRightClickHandler()">
                 <img src="../assets/arrow-right.svg" alt="" />
             </button>
         </div>
@@ -25,11 +25,21 @@ import { Component, Vue } from "vue-property-decorator";
             type: Boolean,
             required: false,
         },
+        disabledLeft: {
+            type: Boolean,
+            default: false,
+        },
+        disabledRight: {
+            type: Boolean,
+            default: false,
+        },
     },
 })
 export default class TitleComponent extends Vue {
     showControls: unknown;
     title: unknown;
+    disabledRight: boolean | undefined;
+    disabledLeft: boolean | undefined;
     arrowLeftClickHandler() {
         this.$emit("arrowLeftClickHandler");
     }
@@ -62,5 +72,8 @@ export default class TitleComponent extends Vue {
             background-color: #807ab7;
         }
     }
+}
+button[disabled] {
+    opacity: 0.5;
 }
 </style>

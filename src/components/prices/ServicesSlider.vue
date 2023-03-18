@@ -40,7 +40,6 @@ import { ISliderItem } from "@/types/slider";
 export default class SevicesSliderComponent extends Vue {
     itemWidth = 636;
     offset = 0;
-    items: Array;
     clickOnLeft() {
         if (!this.offset) {
             return;
